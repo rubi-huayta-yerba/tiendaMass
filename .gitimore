@@ -1,0 +1,31 @@
+# Configuración local sensible
+.env
+.env.local
+config/local.php
+
+# Dependencias
+/vendor/
+/node_modules/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+/storage/logs/
+
+# Bases de datos locales
+*.sqlite
+*.db
+
+# Archivos comprimidos
+*.zip
+*.rar
