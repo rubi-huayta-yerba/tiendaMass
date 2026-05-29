@@ -199,4 +199,33 @@ if ($hora_actual >= 5 && $hora_actual <= 11) {
     
     <div class="saludo">
         <?php echo $saludo . ", " . $cliente_nombre . "!"; ?>
+</div>
+
+    <div>
+        <strong>Cliente:</strong> <?php echo $cliente_nombre; ?><br>
+        <strong>DNI:</strong> <?php echo $cliente_dni; ?><br>
+        <strong>Tipo de Tarjeta:</strong> <?php echo strtoupper($cliente_tipo); ?>
     </div>
+
+    <div class="linea"></div>
+
+    <table class="tabla-productos">
+        <thead>
+            <tr>
+                <th>Cant. Descrip.</th>
+                <th class="text-right">P.Unit</th>
+                <th class="text-right">IGV</th>
+                <th class="text-right">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($lista_productos_procesados as $item): ?>
+                <tr>
+                    <td><?php echo $item['cantidad'] . " x " . $item['nombre']; ?></td>
+                    <td class="text-right">S/ <?php echo number_format($item['precio'], 2); ?></td>
+                    <td class="text-right">S/ <?php echo number_format($item['igv'], 2); ?></td>
+                    <td class="text-right">S/ <?php echo number_format($item['total'], 2); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
