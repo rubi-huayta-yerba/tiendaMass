@@ -229,3 +229,51 @@ if ($hora_actual >= 5 && $hora_actual <= 11) {
             <?php endforeach; ?>
         </tbody>
     </table>
+    <div class="linea"></div>
+
+    <div class="totales">
+        <table style="width: 100%;">
+            <tr>
+                <td>SUBTOTAL GENERAL:</td>
+                <td class="text-right">S/ <?php echo number_format($total_subtotal_general, 2); ?></td>
+            </tr>
+            <tr>
+                <td>TOTAL IGV GENERAL:</td>
+                <td class="text-right">S/ <?php echo number_format($total_igv_general, 2); ?></td>
+            </tr>
+            <tr>
+                <td>DESC. MONTO (<?php echo ($porcentaje_desc_monto * 100); ?>%):</td>
+                <td class="text-right">- S/ <?php echo number_format($descuento_monto, 2); ?></td>
+            </tr>
+            <tr>
+                <td>DESC. TIPO (<?php echo ($porcentaje_desc_cliente * 100); ?>%):</td>
+                <td class="text-right">- S/ <?php echo number_format($descuento_cliente, 2); ?></td>
+            </tr>
+            <tr style="font-size: 16px; border-top: 1px solid #000;">
+                <td><strong>TOTAL A PAGAR:</strong></td>
+                <td class="text-right"><strong>S/ <?php echo number_format($total_final_pagar, 2); ?></strong></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="linea"></div>
+
+    <div style="text-align: center; font-size: 13px; font-weight: bold;">
+        Estación de Pago: <?php echo $instruccion_pago; ?>
+    </div>
+
+    <?php if (!empty($advertencia_pago)): ?>
+        <div class="alert">
+            ⚠️ <strong>ADVERTENCIA:</strong> <?php echo $advertencia_pago; ?>
+        </div>
+    <?php endif; ?>
+
+    <div class="linea"></div>
+    <div style="text-align: center; font-size: 11px;">
+        ¡Gracias por su compra en Mass!<br>
+        Ahorro masivo, todos los días.
+    </div>
+</div>
+
+</body>
+</html>
