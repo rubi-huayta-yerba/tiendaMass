@@ -73,4 +73,39 @@ foreach ($productos as $prod) {
         default:
             $tasa_igv = 0.18; // Por defecto en caso de no estar mapeado
             break;
-    }
+}
+
+    // 3. Subtotal por producto
+    $subtotal_prod = $prod['precio_unitario'] * $prod['cantidad'];
+    $igv_prod = $subtotal_prod * $tasa_igv;
+    $total_prod = $subtotal_prod + $igv_prod;
+
+    // Acumular en los totales generales del carrito
+    $total_subtotal_general += $subtotal_prod;
+    $total_igv_general += $igv_prod;
+
+    // Guardamos los datos calculados para usarlos luego en el HTML
+    $lista_productos_procesados[] = [
+        "nombre" => $prod['nombre'],
+        "precio" => $prod['precio_unitario'],
+        "cantidad" => $prod['cantidad'],
+        "igv" => $igv_prod,
+        "subtotal" => $subtotal_prod,
+        "total" => $total_prod
+    ];
+}
+
+$monto_base_descuento = $total_subtotal_general + $total_igv_general;
+
+// 4. Descuento por monto total (if/elseif)
+$porcentaje_desc_monto = 0.0;
+if ($monto_base_descuento < 30) {
+    $porcentaje_desc_monto = 0.0;
+} elseif ($monto_base_descuento >= 30 && $monto_base_descuento < 100) {
+    $porcentaje_desc_monto = 0.05;
+} elseif ($monto_base_descuento >= 100 && $monto_base_descuento < 200) {
+    $porcentaje_desc_monto = 0.10;
+} else {
+    $porcentaje_desc_monto = 0.15;
+}
+$descuento_monto = $monto_base_descuento * $porcentaje_desc_monto;
