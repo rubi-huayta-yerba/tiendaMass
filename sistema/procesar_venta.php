@@ -109,3 +109,58 @@ if ($monto_base_descuento < 30) {
     $porcentaje_desc_monto = 0.15;
 }
 $descuento_monto = $monto_base_descuento * $porcentaje_desc_monto;
+
+// 5. Descuento adicional por tipo de cliente
+$porcentaje_desc_cliente = 0.0;
+if ($cliente_tipo === "frecuente") {
+    $porcentaje_desc_cliente = 0.02;
+} elseif ($cliente_tipo === "vip") {
+    $porcentaje_desc_cliente = 0.05;
+} else {
+    $porcentaje_desc_cliente = 0.00;
+}
+$descuento_cliente = $monto_base_descuento * $porcentaje_desc_cliente;
+
+// Total de descuentos acumulados y cálculo del Total Final
+$total_descuentos = $descuento_monto + $descuento_cliente;
+$total_final_pagar = $monto_base_descuento - $total_descuentos;
+
+// 6. Validación de método de pago (switch)
+$instruccion_pago = "";
+$advertencia_pago = "";
+
+switch ($metodo_pago) {
+    case 'efectivo':
+        $instruccion_pago = "Pago en efectivo - exacto preferido";
+        if ($total_final_pagar > 500) {
+            $advertencia_pago = "Se sugiere otro método para montos altos";
+        }
+        break;
+    case 'yape':
+    case 'plin':
+        $instruccion_pago = "Mostrar QR del comercio";
+        break;
+    case 'tarjeta':
+        $instruccion_pago = "Insertar tarjeta en POS";
+        break;
+    default:
+        $instruccion_pago = "Método de pago no reconocido";
+        break;
+}
+
+// 7. Saludo según hora actual (date + if)
+date_default_timezone_set('America/Lima'); // Ajuste a hora local de Perú
+$hora_actual = (int)date('H'); 
+$saludo = "";
+
+if ($hora_actual >= 5 && $hora_actual <= 11) {
+    $saludo = "Buenos días";
+} elseif ($hora_actual >= 12 && $hora_actual <= 18) {
+    $saludo = "Buenas tardes";
+} elseif ($hora_actual >= 19 && $hora_actual <= 23) {
+    $saludo = "Buenas noches";
+} else {
+    $saludo = "Tienda cerrada";
+    // Opcional: Podrías poner un exit si la tienda está cerrada, 
+    // pero lo dejamos pasar para que imprima el comprobante simulado.
+}
