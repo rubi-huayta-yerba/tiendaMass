@@ -161,6 +161,42 @@ if ($hora_actual >= 5 && $hora_actual <= 11) {
     $saludo = "Buenas noches";
 } else {
     $saludo = "Tienda cerrada";
-    // Opcional: Podrías poner un exit si la tienda está cerrada, 
-    // pero lo dejamos pasar para que imprima el comprobante simulado.
 }
+// SECCIÓN: OUTPUT (COMPROBANTE HTML)
+// ============================================================================
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Comprobante de Pago - MASS</title>
+    <style>
+        body { font-family: 'Courier New', Courier, monospace; background-color: #f4f4f4; padding: 20px; color: #333; }
+        .ticket { background: #fff; max-width: 450px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .logo { text-align: center; font-size: 28px; font-weight: bold; color: #ffcc00; background-color: #cc0000; padding: 5px; margin-bottom: 10px; }
+        .datos-tienda { text-align: center; font-size: 12px; margin-bottom: 15px; }
+        .linea { border-top: 1px dashed #000; margin: 10px 0; }
+        .tabla-productos { width: 100%; font-size: 13px; border-collapse: collapse; }
+        .tabla-productos th { text-align: left; border-bottom: 1px solid #000; }
+        .text-right { text-align: right; }
+        .totales { font-size: 14px; font-weight: bold; margin-top: 10px; }
+        .alert { background: #fff3cd; color: #856404; padding: 8px; font-size: 12px; border: 1px solid #ffeeba; margin-top: 10px; text-align: center; }
+        .saludo { font-style: italic; text-align: center; margin: 10px 0; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<div class="ticket">
+    <div class="logo">M A S S</div>
+    <div class="datos-tienda">
+        MINIMARKET MASS S.A.C.<br>
+        RUC: 20123456789<br>
+        Dirección: Av. Principal 123 - Arequipa<br>
+        Fecha: <?php echo date('d/m/Y H:i:s'); ?>
+    </div>
+
+    <div class="linea"></div>
+    
+    <div class="saludo">
+        <?php echo $saludo . ", " . $cliente_nombre . "!"; ?>
+    </div>
