@@ -13,7 +13,7 @@ class Cliente {
         $this->nombre = $nombre;
         $this->apellido = $apellido;
         $this->tipo = $tipo;
-        $this->validarDni(); // Validación automática al instanciar
+        $this->validarDni(); 
     }
 
     public function getDni(): string { return $this->dni; }
@@ -29,7 +29,7 @@ class Cliente {
             echo "<div style='color: red; font-weight: bold; padding: 20px; border: 2px solid red;'>";
             echo "ERROR CRÍTICO: El DNI proporcionado no es válido. Debe contener exactamente 8 dígitos numéricos.";
             echo "</div>";
-            exit; // Detiene la ejecución por completo
+            exit; 
         }
     }
 }
