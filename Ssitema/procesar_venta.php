@@ -149,7 +149,7 @@ switch ($metodo_pago) {
 }
 
 // 7. Saludo según hora actual (date + if)
-date_default_timezone_set('America/Lima'); // Ajuste a hora local de Perú
+date_default_timezone_set('America/Lima'); 
 $hora_actual = (int)date('H'); 
 $saludo = "";
 
